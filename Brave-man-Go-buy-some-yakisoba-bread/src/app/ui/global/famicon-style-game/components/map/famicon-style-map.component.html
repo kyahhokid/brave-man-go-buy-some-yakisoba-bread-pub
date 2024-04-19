@@ -1,0 +1,9 @@
+<div class="content">
+  <app-famicon-style-map-background class="background" [ngStyle]="backgroundStyle"
+    [famiconStyleGameState]="famiconStyleGameState"></app-famicon-style-map-background>
+  <div class="character" [ngStyle]="characterStyle">
+    <app-famicon-style-game-character
+      [characterDirection]="famiconStyleGameState.braveMan.direction"></app-famicon-style-game-character>
+  </div>
+  <app-famicon-style-map-layer2 class="layer2" [ngStyle]="layer2Style"></app-famicon-style-map-layer2>
+</div>

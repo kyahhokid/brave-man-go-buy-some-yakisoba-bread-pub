@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { ConversationState } from 'src/app/domain/state/conversation-state';
 import { GameState } from 'src/app/domain/state/game-state';
 
 /**
@@ -10,8 +11,8 @@ import { GameState } from 'src/app/domain/state/game-state';
   styleUrls: ['./conversation.component.scss']
 })
 export class ConversationComponent {
-  // ゲームの状況
-  @Input() gameState = new GameState();
+  // 会話の状況
+  @Input() conversationState = new ConversationState();
   // コンテントがクリックされたことを通知するイベントエミッター
   @Output() contentClick: EventEmitter<null> = new EventEmitter()
 

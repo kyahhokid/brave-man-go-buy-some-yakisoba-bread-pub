@@ -1,5 +1,7 @@
 <div class="game-area">
-  <app-conversation *ngIf="isShowConversationComponent" [gameState]="gameState"
+  <app-conversation *ngIf="isShowConversationComponent" [conversationState]="gameState.conversationState"
     (contentClick)="onClickConversationContent()"></app-conversation>
-  <app-convenience-store *ngIf="gameState.chapterType === chapterType.FirstYakisobaBread"></app-convenience-store>
+  <app-famicon-style-game *ngIf="gameState.chapterType === chapterType.FirstYakisobaBread"
+    [famiconStyleGameState]="gameState.famiconStyleGameState"
+    (moveButtonClick)="onClickMoveButtonInFamiconStyleGame($event)"></app-famicon-style-game>
 </div>

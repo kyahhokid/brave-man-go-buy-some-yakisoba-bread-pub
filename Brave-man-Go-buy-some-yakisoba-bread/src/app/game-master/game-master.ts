@@ -2,10 +2,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { GameState } from '../domain/state/game-state';
-import { ConversationService } from '../service/conversation/conversation.service';
-import { Conversation } from '../domain/model/conversation/conversation';
-import { BackgroundType } from '../domain/model/conversation/background-type';
 import { ChapterType } from '../domain/model/chapter/chapter-type';
+import { Position } from '../domain/model/global/position';
+import { FamiconStyleGameState } from '../domain/state/famicon-style-game-state';
+import { ConversationManager } from './managers/conversation-manager';
+import { FamiconStyleGameManager } from './managers/famicon-style-game-manager';
+import { DirectionType } from '../domain/model/global/direction';
 
 /**
  * ゲームマスター
@@ -18,7 +20,8 @@ export class GameMaster {
   private store = new BehaviorSubject<GameState>(new GameState());
 
   constructor(
-    private conversationService: ConversationService,
+    private conversationManager: ConversationManager,
+    private famiconStyleGameManager: FamiconStyleGameManager,
   ) { }
 
   // ゲームの状況
@@ -27,40 +30,37 @@ export class GameMaster {
   }
 
   /**
-   * 会話を始める。
+   * セットアップを行う。
+   * ゲームの状態を初期化してチャプターセットアップを実行する。
    */
-  startConversation() {
-    const gameState = Object.assign(new GameState, this.store.getValue());
-    gameState.conversationIndex = 0;
-    gameState.conversation = this.conversationService.get(gameState.chapterType, gameState.conversationIndex) || new Conversation('', '', null);
-    if (gameState.conversation.backgroundType !== null) {
-      gameState.conversationBackgroundStyle = this.conversationService.getBackgroundStyle(gameState.conversation.backgroundType);
-    }
-    this.store.next(gameState);
+  setUp() {
+    this.store.next(new GameState());
+    this.setUpChapter();
   }
 
   /**
-   * 会話を進める。
+   * チャプターセットアップを行う。
    */
-  advanceConversation() {
+  setUpChapter() {
     const gameState = Object.assign(new GameState, this.store.getValue());
-    gameState.conversationIndex++;
-    const conversation = this.conversationService.get(gameState.chapterType, gameState.conversationIndex);
-    if (conversation) {
-      gameState.conversation = conversation;
-      if (gameState.conversation.backgroundType !== null) {
-        gameState.conversationBackgroundStyle = this.conversationService.getBackgroundStyle(gameState.conversation.backgroundType);
+    switch (gameState.chapterType) {
+      case ChapterType.FirstYakisobaBreadConversation: {
+        this.conversationManager.setStore(this.store);
+        this.conversationManager.startConversation();
+        break;
       }
-      this.store.next(gameState);
-    } else {
-      this.advanceChapter();
+      case ChapterType.FirstYakisobaBread: {
+        this.famiconStyleGameManager.setStore(this.store);
+        this.famiconStyleGameManager.setup();
+        break;
+      }
     }
   }
 
   /**
    * チャプターを進める。
    */
-  advanceChapter() {
+  advanceChapter = () => {
     const gameState = Object.assign(new GameState, this.store.getValue());
     switch (gameState.chapterType) {
       case ChapterType.FirstYakisobaBreadConversation: {
@@ -69,14 +69,21 @@ export class GameMaster {
       }
     }
     this.store.next(gameState);
+    this.setUpChapter();
   }
 
   /**
-   * セットアップを行う。
-   * ゲームの状況を初期化して、最初の会話を開始する。
+   * 会話を進める。
    */
-  async setUp() {
-    this.store.next(new GameState());
-    this.startConversation();
+  advanceConversation() {
+    this.conversationManager.advanceConversation(this.advanceChapter);
+  }
+
+  /**
+   * 勇者を動かす。(ファミコン風ゲーム用)
+   * @param directionType 方向種別
+   */
+  moveBraveManInFamiconStyleGame(directionType: DirectionType) {
+    this.famiconStyleGameManager.moveBraveMan(directionType);
   }
 }

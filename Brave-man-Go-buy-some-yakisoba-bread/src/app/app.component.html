@@ -1,3 +1,4 @@
 <ng-container *ngIf="gameState$ | async as gameState">
-  <app-game-area [gameState]="gameState" (conversationContentClick)="onClickConversationContent()"></app-game-area>
+  <app-game-area [gameState]="gameState" (conversationContentClick)="onClickConversationContent()"
+    (moveButtonInFamiconStyleGameClick)="onClickMoveButtonInFamiconStyleGame($event)"></app-game-area>
 </ng-container>

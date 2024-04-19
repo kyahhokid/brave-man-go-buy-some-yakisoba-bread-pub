@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GameMaster } from './game-master/game-master';
+import { DirectionType } from './domain/model/global/direction';
 
 @Component({
   selector: 'app-root',
@@ -26,5 +27,12 @@ export class AppComponent {
    */
   onClickConversationContent() {
     this.gameMaster.advanceConversation();
+  }
+
+  /**
+   * ファミコン風ゲームの移動ボタンをクリックされると呼ばれる。
+   */
+  onClickMoveButtonInFamiconStyleGame(directionType: DirectionType) {
+    this.gameMaster.moveBraveManInFamiconStyleGame(directionType);
   }
 }

@@ -1,0 +1,20 @@
+.content {
+  position: relative;
+
+  .background {
+    display: block;
+    width: 360px;
+  }
+
+  .character {
+    position: absolute;
+  }
+
+  .layer2 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 360px;
+    height: 365px;
+  }
+}
