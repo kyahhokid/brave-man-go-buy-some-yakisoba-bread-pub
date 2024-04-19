@@ -1,0 +1,5 @@
+<div class="game-area">
+  <app-conversation *ngIf="isShowConversationComponent" [gameState]="gameState"
+    (contentClick)="onClickConversationContent()"></app-conversation>
+  <app-convenience-store *ngIf="gameState.chapterType === chapterType.FirstYakisobaBread"></app-convenience-store>
+</div>

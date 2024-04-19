@@ -1,0 +1,46 @@
+.content {
+  height: 134px;
+  width: 360px;
+  background: url(../../../../../../../assets/images/message-box.png);
+  background-size: 434px auto;
+  background-repeat: no-repeat;
+  background-position: -37px 0px;
+  position: relative;
+
+  .name {
+    position: absolute;
+    left: 10.5px;
+    top: 30px;
+    $shadow-color: white;
+    $shadow-size: 0.5;
+    text-shadow:
+      (0px + $shadow-size) (0px + $shadow-size) 0 $shadow-color,
+      (0px - $shadow-size) (0px - $shadow-size) 0 $shadow-color,
+      (0px - $shadow-size) (0px + $shadow-size) 0 $shadow-color,
+      (0px + $shadow-size) (0px - $shadow-size) 0 $shadow-color,
+      0 (0px + $shadow-size) 0 $shadow-color,
+      0 (0px - $shadow-size) 0 $shadow-color,
+      (0px - $shadow-size) 0 0 $shadow-color,
+      (0px + $shadow-size) 0 0 $shadow-color;
+  }
+
+  .content-of-conversation {
+    position: absolute;
+    font-size: 14px;
+    width: 326px;
+    left: 17px;
+    top: 57px;
+    color: white;
+    $shadow-color: black;
+    $shadow-size: 0.5;
+    text-shadow:
+      (0px + $shadow-size) (0px + $shadow-size) 0 $shadow-color,
+      (0px - $shadow-size) (0px - $shadow-size) 0 $shadow-color,
+      (0px - $shadow-size) (0px + $shadow-size) 0 $shadow-color,
+      (0px + $shadow-size) (0px - $shadow-size) 0 $shadow-color,
+      0 (0px + $shadow-size) 0 $shadow-color,
+      0 (0px - $shadow-size) 0 $shadow-color,
+      (0px - $shadow-size) 0 0 $shadow-color,
+      (0px + $shadow-size) 0 0 $shadow-color;
+  }
+}
