@@ -14,6 +14,7 @@ import { FamiconStyleMapBackgroundComponent } from './ui/global/famicon-style-ga
 import { FamiconStyleGameControllerComponent } from './ui/global/famicon-style-game/components/controller/famicon-style-game-controller/famicon-style-game-controller.component';
 import { FamiconStyleGameCharacterComponent } from './ui/global/famicon-style-game/components/map/components/character/famicon-style-game-character.component';
 import { FamiconStyleMapLayer2Component } from './ui/global/famicon-style-game/components/map/components/famicon-style-map-layer2/famicon-style-map-layer2.component';
+import { KiraComponent } from './ui/global/kira/kira.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FamiconStyleMapLayer2Component } from './ui/global/famicon-style-game/c
     FamiconStyleGameControllerComponent,
     FamiconStyleGameCharacterComponent,
     FamiconStyleMapLayer2Component,
+    KiraComponent,
   ],
   imports: [
     BrowserModule,
