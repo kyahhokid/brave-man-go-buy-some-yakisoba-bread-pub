@@ -191,6 +191,6 @@ export class FamiconStyleGameManager {
    * 調べる。
    */
   investigate() {
-    console.log('FamiconStyleGameManager');
+    console.log('ファミコン風ゲームマネージャー「調べるボタンがクリックされました。」');
   }
 }
