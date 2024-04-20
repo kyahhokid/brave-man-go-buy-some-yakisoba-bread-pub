@@ -31,6 +31,7 @@ export class ConversationManager {
    */
   startConversation() {
     const gameState = Object.assign(new GameState, this.store.getValue());
+    gameState.conversationState.isShowConversation = true;
     gameState.conversationState.conversationIndex = 0;
     gameState.conversationState.conversation = this.conversationService.get(gameState.chapterType, gameState.conversationState.conversationIndex) || new Conversation('', '', null);
     if (gameState.conversationState.conversation.backgroundType !== null) {
@@ -54,6 +55,7 @@ export class ConversationManager {
       }
       this.store.next(gameState);
     } else {
+      gameState.conversationState.isShowConversation = false;
       advanceChapter();
     }
   }

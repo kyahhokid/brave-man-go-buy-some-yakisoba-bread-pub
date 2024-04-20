@@ -10,4 +10,6 @@ export class ConversationState {
   conversationBackgroundStyle = {};
   // 会話
   conversation = new Conversation('', '', null);
+  // 会話を表示するか
+  isShowConversation = false;
 }

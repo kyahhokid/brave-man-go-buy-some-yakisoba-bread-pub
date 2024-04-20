@@ -20,27 +20,11 @@ export class GameAreaComponent implements OnChanges {
   @Output() moveButtonInFamiconStyleGameClick: EventEmitter<DirectionType> = new EventEmitter();
   // 調べるボタンがクリックされたことを通知するイベントエミッター
   @Output() investigateButtonInFamiconStyleGameClick: EventEmitter<DirectionType> = new EventEmitter();
-
-  // 会話コンポーネントを表示するか
-  isShowConversationComponent = false;
   // チャプター種別
   readonly chapterType = ChapterType;
 
   ngOnChanges() {
-    this.updateIsShowConversationComponent()
-  }
 
-  /**
-   * 会話コンポーネント表示フラグを更新する。
-   */
-  updateIsShowConversationComponent() {
-    switch (this.gameState.chapterType) {
-      case ChapterType.FirstYakisobaBreadConversation: {
-        this.isShowConversationComponent = true;
-        break;
-      }
-      default: this.isShowConversationComponent = false;
-    }
   }
 
   /**
