@@ -12,6 +12,8 @@ import { DirectionType } from 'src/app/domain/model/global/direction';
 export class FamiconStyleGameControllerComponent {
   // 移動ボタンがクリックされたことを通知するイベントエミッター
   @Output() moveButtonClick: EventEmitter<DirectionType> = new EventEmitter();
+  // 調べるボタンがクリックされたことを通知するイベントエミッター
+  @Output() investigateButtonClick: EventEmitter<void> = new EventEmitter();
   // 方向種別
   directionType = DirectionType;
 
@@ -21,5 +23,13 @@ export class FamiconStyleGameControllerComponent {
    */
   onClickMoveButton(directionType: DirectionType) {
     this.moveButtonClick.emit(directionType);
+  }
+
+  /**
+   * 調べるボタンがクリックされたときに呼ばれる。
+   * OUTPUTで調べるボタンがクリックされたことを通知する。
+   */
+  onClickInvestigateButton() {
+    this.investigateButtonClick.emit();
   }
 }

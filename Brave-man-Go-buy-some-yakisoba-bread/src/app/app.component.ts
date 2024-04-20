@@ -35,4 +35,11 @@ export class AppComponent {
   onClickMoveButtonInFamiconStyleGame(directionType: DirectionType) {
     this.gameMaster.moveBraveManInFamiconStyleGame(directionType);
   }
+
+  /**
+   * ファミコン風ゲームの移動ボタンをクリックされると呼ばれる。
+   */
+  onClickInvestigateButtonInFamiconStyleGame() {
+    this.gameMaster.investigateInFamiconStyleGame();
+  }
 }

@@ -18,6 +18,8 @@ export class GameAreaComponent implements OnChanges {
   @Output() conversationContentClick: EventEmitter<null> = new EventEmitter()
   // 移動ボタンがクリックされたことを通知するイベントエミッター
   @Output() moveButtonInFamiconStyleGameClick: EventEmitter<DirectionType> = new EventEmitter();
+  // 調べるボタンがクリックされたことを通知するイベントエミッター
+  @Output() investigateButtonInFamiconStyleGameClick: EventEmitter<DirectionType> = new EventEmitter();
 
   // 会話コンポーネントを表示するか
   isShowConversationComponent = false;
@@ -55,5 +57,13 @@ export class GameAreaComponent implements OnChanges {
    */
   onClickMoveButtonInFamiconStyleGame(directionType: DirectionType) {
     this.moveButtonInFamiconStyleGameClick.emit(directionType);
+  }
+
+  /**
+   * ファミコン風ゲームの調べるボタンがクリックされたときに呼ばれる。
+   * OUTPUTでファミコン風ゲームの調べるボタンがクリックされたことを通知する。
+   */
+  onClickInvestigateButtonInFamiconStyleGame() {
+    this.investigateButtonInFamiconStyleGameClick.emit();
   }
 }

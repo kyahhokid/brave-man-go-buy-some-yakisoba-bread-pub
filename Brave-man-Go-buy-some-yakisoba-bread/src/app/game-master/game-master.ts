@@ -86,4 +86,11 @@ export class GameMaster {
   moveBraveManInFamiconStyleGame(directionType: DirectionType) {
     this.famiconStyleGameManager.moveBraveMan(directionType);
   }
+
+  /**
+   * 調べる。(ファミコン風ゲーム用)
+   */
+  investigateInFamiconStyleGame() {
+    this.famiconStyleGameManager.investigate();
+  }
 }

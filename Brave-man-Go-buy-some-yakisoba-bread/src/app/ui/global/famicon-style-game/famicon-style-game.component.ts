@@ -15,6 +15,8 @@ export class FamiconStyleGameComponent {
   @Input() famiconStyleGameState = new FamiconStyleGameState();
   // 移動ボタンがクリックされたことを通知するイベントエミッター
   @Output() moveButtonClick: EventEmitter<DirectionType> = new EventEmitter();
+  // 調べるボタンがクリックされたことを通知するイベントエミッター
+  @Output() investigateButtonClick: EventEmitter<void> = new EventEmitter();
 
   /**
    * 移動ボタンがクリックされたときに呼ばれる。
@@ -22,5 +24,13 @@ export class FamiconStyleGameComponent {
    */
   onClickMoveButton(directionType: DirectionType) {
     this.moveButtonClick.emit(directionType);
+  }
+
+  /**
+   * 調べるボタンがクリックされたときに呼ばれる。
+   * OUTPUTで調べるボタンがクリックされたことを通知する。
+   */
+  onClickInvestigateButton() {
+    this.investigateButtonClick.emit();
   }
 }

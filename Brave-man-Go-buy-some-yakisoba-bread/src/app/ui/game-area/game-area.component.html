@@ -3,5 +3,6 @@
     (contentClick)="onClickConversationContent()"></app-conversation>
   <app-famicon-style-game *ngIf="gameState.chapterType === chapterType.FirstYakisobaBread"
     [famiconStyleGameState]="gameState.famiconStyleGameState"
-    (moveButtonClick)="onClickMoveButtonInFamiconStyleGame($event)"></app-famicon-style-game>
+    (moveButtonClick)="onClickMoveButtonInFamiconStyleGame($event)"
+    (investigateButtonClick)="onClickInvestigateButtonInFamiconStyleGame()"></app-famicon-style-game>
 </div>

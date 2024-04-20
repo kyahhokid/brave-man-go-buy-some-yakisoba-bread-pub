@@ -186,4 +186,11 @@ export class FamiconStyleGameManager {
       }
     }
   }
+
+  /**
+   * 調べる。
+   */
+  investigate() {
+    console.log('FamiconStyleGameManager');
+  }
 }
