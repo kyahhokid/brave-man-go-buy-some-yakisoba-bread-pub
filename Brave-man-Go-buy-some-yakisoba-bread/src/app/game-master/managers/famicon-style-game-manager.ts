@@ -6,6 +6,8 @@ import { Position } from "src/app/domain/model/global/position";
 import { FamiconStyleGameState } from "src/app/domain/state/famicon-style-game-state";
 import { GameState } from "src/app/domain/state/game-state";
 import { MapService } from "src/app/service/map/map.service";
+import { FirstYakisobaBreadGameManager } from "./first-yakisoba-bread-game-manager";
+import { ChapterType } from "src/app/domain/model/chapter/chapter-type";
 
 /**
  * ファミコン風ゲームマネージャー
@@ -19,6 +21,7 @@ export class FamiconStyleGameManager {
 
   constructor(
     private mapService: MapService,
+    private firstYakisobaBreadManager: FirstYakisobaBreadGameManager,
   ) { }
 
   /**
@@ -40,6 +43,7 @@ export class FamiconStyleGameManager {
     gameState.famiconStyleGameState.braveMan.position.x = 4;
     gameState.famiconStyleGameState.braveMan.position.y = 11;
     gameState.famiconStyleGameState.map = this.mapService.getMap();
+    this.firstYakisobaBreadManager.setStore(this.store);
     this.store.next(gameState);
   }
 
@@ -191,6 +195,9 @@ export class FamiconStyleGameManager {
    * 調べる。
    */
   investigate() {
-    console.log('ファミコン風ゲームマネージャー「調べるボタンがクリックされました。」');
+    const gameState = Object.assign(new GameState, this.store.getValue());
+    if (gameState.chapterType === ChapterType.FirstYakisobaBread) {
+      this.firstYakisobaBreadManager.investigate();
+    }
   }
 }
