@@ -3,6 +3,7 @@ import { BehaviorSubject } from "rxjs";
 import { Conversation } from "src/app/domain/model/conversation/conversation";
 import { GameState } from "src/app/domain/state/game-state";
 import { ConversationService } from "src/app/service/conversation/conversation.service";
+import { ConversationController } from "./controller/conversation-controller";
 
 /**
  * 会話マネージャー
@@ -16,6 +17,7 @@ export class ConversationManager {
 
   constructor(
     private conversationService: ConversationService,
+    private conversationController: ConversationController,
   ) { }
 
   /**
@@ -31,11 +33,7 @@ export class ConversationManager {
    */
   startConversation() {
     const gameState = Object.assign(new GameState, this.store.getValue());
-    gameState.conversationState.conversationIndex = 0;
-    gameState.conversationState.conversation = this.conversationService.get(gameState.chapterType, gameState.conversationState.conversationIndex) || new Conversation('', '', null);
-    if (gameState.conversationState.conversation.backgroundType !== null) {
-      gameState.conversationState.conversationBackgroundStyle = this.conversationService.getBackgroundStyle(gameState.conversationState.conversation.backgroundType);
-    }
+    this.conversationController.startConversation(gameState.conversationState, gameState.chapterType, -1);
     this.store.next(gameState);
   }
 
@@ -45,16 +43,6 @@ export class ConversationManager {
    */
   advanceConversation(advanceChapter: () => void) {
     const gameState = Object.assign(new GameState, this.store.getValue());
-    gameState.conversationState.conversationIndex++;
-    const conversation = this.conversationService.get(gameState.chapterType, gameState.conversationState.conversationIndex);
-    if (conversation) {
-      gameState.conversationState.conversation = conversation;
-      if (gameState.conversationState.conversation.backgroundType !== null) {
-        gameState.conversationState.conversationBackgroundStyle = this.conversationService.getBackgroundStyle(gameState.conversationState.conversation.backgroundType);
-      }
-      this.store.next(gameState);
-    } else {
-      advanceChapter();
-    }
+    this.conversationController.advanceConversation(gameState.conversationState, gameState.chapterType, -1, () => { this.store.next(gameState) }, advanceChapter);
   }
 }

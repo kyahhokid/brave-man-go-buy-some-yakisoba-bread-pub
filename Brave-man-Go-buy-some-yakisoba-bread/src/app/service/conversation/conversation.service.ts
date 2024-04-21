@@ -29,6 +29,8 @@ export class ConversationService {
     switch (chapterType) {
       case ChapterType.FirstYakisobaBreadConversation:
         return this.createFirstYakisobaBreadConversationChapterConversation(index);
+      case ChapterType.FirstYakisobaBread:
+        return this.createFirstYakisobaBreadChapterConversation(index, conversationListId);
       default:
         return null;
     }
@@ -83,6 +85,32 @@ export class ConversationService {
         new Conversation('アレン', 'むぅ……分かりました。とりあえず焼きそばパン買ってきます…。', null),
         new Conversation('神', 'うむ。気をつけて言ってくるのじゃぞ。', null),
       ]
+    }
+
+    if (this.conversationListCache.length > index) {
+      return this.conversationListCache[index];
+    }
+    return null
+  }
+
+  /**
+ * 最初の焼きそばパンの会話パートの会話を生成する。
+ * @param index インデックス
+ */
+  private createFirstYakisobaBreadChapterConversation(index: number, conversationListId: number) {
+    if (this.chapterTypeCache !== ChapterType.FirstYakisobaBread || this.conversationListIdCache !== conversationListId) {
+      this.cacheClear();
+      this.chapterTypeCache = ChapterType.FirstYakisobaBread;
+      this.conversationListIdCache = conversationListId;
+      switch (conversationListId) {
+        case 0: {
+          this.conversationListCache = [
+            new Conversation('アレン', 'あった。焼きそばパン。', null),
+            new Conversation('アレン', 'これが魔王と関係あるとは思えないけど……。', null),
+            new Conversation('アレン', 'はぁ、とりあえず持って帰ってみるか。', null),
+          ]
+        }
+      }
     }
 
     if (this.conversationListCache.length > index) {
