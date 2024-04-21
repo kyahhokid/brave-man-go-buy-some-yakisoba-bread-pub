@@ -7,7 +7,7 @@ import { FamiconStyleGameState } from "./famicon-style-game-state";
  */
 export class GameState {
   // チャプター種別
-  chapterType = ChapterType.FirstYakisobaBreadConversation;
+  chapterType = ChapterType.FirstYakisobaBread;
   // 会話の状況
   conversationState = new ConversationState();
   // ファミコン風ゲームの状況
