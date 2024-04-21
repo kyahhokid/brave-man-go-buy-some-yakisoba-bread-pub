@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { Conversation } from "src/app/domain/model/conversation/conversation";
 import { GameState } from "src/app/domain/state/game-state";
-import { ConversationService } from "src/app/service/conversation/conversation.service";
 import { ConversationController } from "./controller/conversation-controller";
 
 /**
@@ -16,7 +14,6 @@ export class ConversationManager {
   private store = new BehaviorSubject<GameState>(new GameState());
 
   constructor(
-    private conversationService: ConversationService,
     private conversationController: ConversationController,
   ) { }
 

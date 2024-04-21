@@ -4,6 +4,7 @@ import { CharacterDirectionType } from "src/app/domain/model/famicon-style-game/
 import { DirectionType } from "src/app/domain/model/global/direction";
 import { GameState } from "src/app/domain/state/game-state";
 import { ConversationManager } from "./conversation-manager";
+import { ConversationController } from "./controller/conversation-controller";
 
 /**
  *  最初の焼きそばパンのゲームマネージャー
@@ -16,7 +17,7 @@ export class FirstYakisobaBreadGameManager {
   private store = new BehaviorSubject<GameState>(new GameState());
 
   constructor(
-    private conversationManager: ConversationManager,
+    private conversationController: ConversationController,
   ) { }
 
   /**
@@ -25,7 +26,6 @@ export class FirstYakisobaBreadGameManager {
    */
   setStore(store: BehaviorSubject<GameState>) {
     this.store = store;
-    this.conversationManager.setStore(store);
   }
 
   investigate() {
@@ -33,7 +33,17 @@ export class FirstYakisobaBreadGameManager {
     const braveMan = gameState.famiconStyleGameState.braveMan;
     if (braveMan.position.x === 9 && braveMan.position.y === 2 && braveMan.direction === CharacterDirectionType.Up) {
       gameState.famiconStyleGameState.isShowConversation = true;
-      this.conversationManager.startConversation();
+      this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, 0);
+      this.store.next(gameState);
     }
+  }
+
+  /**
+   * 会話を進める。
+   * @param advanceChapter チャプターを進めるコールバック関数
+   */
+  advanceConversation(advanceChapter: () => void) {
+    const gameState = Object.assign(new GameState, this.store.getValue());
+    this.conversationController.advanceConversation(gameState.conversationState, gameState.chapterType, -1, () => { this.store.next(gameState) }, advanceChapter);
   }
 }

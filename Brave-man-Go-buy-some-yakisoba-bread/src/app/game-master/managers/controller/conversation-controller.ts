@@ -36,9 +36,9 @@ export class ConversationController {
    * @param chapterType チャプター種別
    * @param conversationListId 会話リストID
    * @param onAdvanceConversationIndex 会話インデックスが進んだことを通知するコールバック関数
-   * @param advanceChapter チャプターを進めるコールバック関数
+   * @param onFinishConversation 会話が終わったことを通知するコールバック関数
    */
-  advanceConversation(conversationState: ConversationState, chapterType: ChapterType, conversationListId: number, onAdvanceConversationIndex: () => void, advanceChapter: () => void) {
+  advanceConversation(conversationState: ConversationState, chapterType: ChapterType, conversationListId: number, onAdvanceConversationIndex: () => void, onFinishConversation: () => void) {
     conversationState.conversationIndex++;
     const conversation = this.conversationService.get(chapterType, conversationState.conversationIndex);
     if (conversation) {
@@ -48,7 +48,7 @@ export class ConversationController {
       }
       onAdvanceConversationIndex();
     } else {
-      advanceChapter();
+      onFinishConversation();
     }
   }
 }
