@@ -10,8 +10,12 @@ import { Conversation } from 'src/app/domain/model/conversation/conversation';
   providedIn: 'root'
 })
 export class ConversationService {
-  // 最初の焼きそばパンの会話リスト
-  firstYakisobaBreadChapterConversationList: Conversation[] = [];
+  // チャプター種別のキャッシュ
+  chapterTypeCache: ChapterType | null = null;
+  // 会話リストIDのキャッシュ
+  conversationListIdCache = -1;
+  // 会話リストのキャッシュ
+  conversationListCache: Conversation[] = [];
 
   constructor() { }
 
@@ -19,24 +23,26 @@ export class ConversationService {
    * 会話を取得する。
    * @param chapterType チャプター種別
    * @param index インデックス
+   * @param conversationListId 会話リストID
    */
-  get(chapterType: ChapterType, index: number): Conversation | null {
+  get(chapterType: ChapterType, index: number, conversationListId = -1): Conversation | null {
     switch (chapterType) {
       case ChapterType.FirstYakisobaBreadConversation:
-        return this.createFirstYakisobaBreadChapterConversationList(index);
+        return this.createFirstYakisobaBreadConversationChapterConversation(index);
       default:
         return null;
     }
   }
 
   /**
-   * 最初の焼きそばパンの会話を生成する。
+   * 最初の焼きそばパンの会話パートの会話を生成する。
    * @param index インデックス
    */
-  private createFirstYakisobaBreadChapterConversationList(index: number) {
-    if (this.firstYakisobaBreadChapterConversationList.length <= 0) {
+  private createFirstYakisobaBreadConversationChapterConversation(index: number) {
+    if (this.chapterTypeCache !== ChapterType.FirstYakisobaBreadConversation) {
       this.cacheClear();
-      this.firstYakisobaBreadChapterConversationList = [
+      this.chapterTypeCache = ChapterType.FirstYakisobaBreadConversation;
+      this.conversationListCache = [
         new Conversation('???', '…め……じゃ……', BackgroundType.NightRoom),
         new Conversation('???', 'め……める……', null),
         new Conversation('???', '目覚めるのじゃ！アレン！！', null),
@@ -79,8 +85,8 @@ export class ConversationService {
       ]
     }
 
-    if (this.firstYakisobaBreadChapterConversationList.length > index) {
-      return this.firstYakisobaBreadChapterConversationList[index];
+    if (this.conversationListCache.length > index) {
+      return this.conversationListCache[index];
     }
     return null
   }
@@ -108,6 +114,8 @@ export class ConversationService {
    * キャッシュをクリアする。
    */
   private cacheClear() {
-    this.firstYakisobaBreadChapterConversationList.splice(0);
+    this.chapterTypeCache = null;
+    this.conversationListIdCache = -1;
+    this.conversationListCache.splice(0);
   }
 }
