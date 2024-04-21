@@ -6,4 +6,7 @@
       [characterDirection]="famiconStyleGameState.braveMan.direction"></app-famicon-style-game-character>
   </div>
   <app-famicon-style-map-layer2 class="layer2" [ngStyle]="layer2Style"></app-famicon-style-map-layer2>
+  <app-conversation class="conversation" *ngIf="famiconStyleGameState.isShowConversation"
+    [conversationState]="famiconStyleGameState.conversationState"
+    (contentClick)="onClickConversationContent()"></app-conversation>
 </div>

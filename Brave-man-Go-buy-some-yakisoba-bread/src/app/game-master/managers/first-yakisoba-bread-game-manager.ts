@@ -26,7 +26,7 @@ export class FirstYakisobaBreadGameManager {
     const gameState = Object.assign(new GameState, this.store.getValue());
     const braveMan = gameState.famiconStyleGameState.braveMan;
     if (braveMan.position.x === 9 && braveMan.position.y === 2 && braveMan.direction === CharacterDirectionType.Up) {
-      console.log('最初の焼きそばパンを手に入れた');
+      gameState.famiconStyleGameState.isShowConversation = true;
 
     }
   }

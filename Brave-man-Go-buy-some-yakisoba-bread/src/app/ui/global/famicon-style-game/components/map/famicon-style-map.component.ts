@@ -34,4 +34,6 @@ export class FamiconStyleMapComponent implements OnChanges {
       'margin-left': `${FamiconStyleMapComponentUtil.getLeftForMap(this.famiconStyleGameState)}px`,
     }
   }
+
+  onClickConversationContent() { }
 }
