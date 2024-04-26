@@ -11,7 +11,7 @@ export class FamiconStyleMapComponentUtil {
    * @returns 
    */
   static getLeftForBraveMan(famiconStyleGameState: FamiconStyleGameState): number {
-    const maxX = famiconStyleGameState.map[famiconStyleGameState.braveMan.position.y].length - 1;
+    const maxX = famiconStyleGameState.map[Math.round(famiconStyleGameState.braveMan.position.y)].length - 1;
     let positionX = famiconStyleGameState.braveMan.position.x;
     if (5 <= positionX && positionX <= maxX - 6) {
       positionX = 5;
@@ -26,7 +26,7 @@ export class FamiconStyleMapComponentUtil {
    * @param famiconStyleGameState 
    */
   static getLeftForMap(famiconStyleGameState: FamiconStyleGameState): number {
-    const maxX = famiconStyleGameState.map[famiconStyleGameState.braveMan.position.y].length - 1;
+    const maxX = famiconStyleGameState.map[Math.round(famiconStyleGameState.braveMan.position.y)].length - 1;
     const positionX = famiconStyleGameState.braveMan.position.x;
     let backgroundPositionX = 0;
     if (5 <= positionX && positionX <= maxX - 6) {

@@ -162,9 +162,6 @@ export class FamiconStyleGameManager {
   private isMovable(direction: DirectionType, famiconStyleGameState: FamiconStyleGameState): boolean {
     switch (direction) {
       case DirectionType.Down: {
-        console.log(famiconStyleGameState.map.length);
-        console.log(famiconStyleGameState.braveMan.position.y + 1);
-
         if (famiconStyleGameState.map.length <= famiconStyleGameState.braveMan.position.y + 1) {
           return false;
         }
