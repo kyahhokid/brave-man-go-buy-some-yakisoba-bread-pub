@@ -32,8 +32,15 @@ export class FirstYakisobaBreadGameManager {
   investigate() {
     const gameState = Object.assign(new GameState, this.store.getValue());
     const braveMan = gameState.famiconStyleGameState.braveMan;
-    if (braveMan.position.x === 9 && braveMan.position.y === 2 && braveMan.direction === CharacterDirectionType.Up) {
-      gameState.famiconStyleGameState.conversationId = 0;
+    if (gameState.famiconStyleGameState.conversationListId !== -1) {
+      this.advanceConversation(() => {
+        gameState.famiconStyleGameState.conversationListId = -1;
+        // 各コンポーネントに状態更新を検知させるためにオブジェクトを再生成している。
+        gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState(), gameState.famiconStyleGameState);
+        this.store.next(gameState);
+      })
+    } else if (braveMan.position.x === 9 && braveMan.position.y === 2 && braveMan.direction === CharacterDirectionType.Up) {
+      gameState.famiconStyleGameState.conversationListId = 0;
       this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, 0);
       // 各コンポーネントに状態更新を検知させるためにオブジェクトを再生成している。
       gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState(), gameState.famiconStyleGameState);
@@ -47,6 +54,6 @@ export class FirstYakisobaBreadGameManager {
    */
   advanceConversation(advanceChapter: () => void) {
     const gameState = Object.assign(new GameState, this.store.getValue());
-    this.conversationController.advanceConversation(gameState.conversationState, gameState.chapterType, -1, () => { this.store.next(gameState) }, advanceChapter);
+    this.conversationController.advanceConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, gameState.famiconStyleGameState.conversationListId, () => { this.store.next(gameState) }, advanceChapter);
   }
 }

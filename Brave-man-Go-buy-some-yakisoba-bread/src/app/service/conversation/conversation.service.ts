@@ -107,7 +107,7 @@ export class ConversationService {
           this.conversationListCache = [
             new Conversation('アレン', 'あった。焼きそばパン。', null),
             new Conversation('アレン', 'これが魔王と関係あるとは思えないけど……。', null),
-            new Conversation('アレン', 'はぁ、とりあえず持って帰ってみるか。', null),
+            new Conversation('アレン', 'まぁ……とりあえず持って帰ってみるか。', null),
           ]
         }
       }

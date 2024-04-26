@@ -19,8 +19,8 @@ export class FamiconStyleGameControllerComponent implements OnChanges {
   @Output() investigateButtonClick: EventEmitter<void> = new EventEmitter();
   // 方向種別
   directionType = DirectionType;
-  // アクションボタンテキスト
-  actionButtonText = '';
+  // 調べるボタンテキスト
+  investigateButtonText = '調べる';
 
   ngOnChanges(changes: SimpleChanges): void {
     // アクションボタンテキストを更新する。
@@ -31,10 +31,10 @@ export class FamiconStyleGameControllerComponent implements OnChanges {
    * アクションボタンテキストを更新する。
    */
   private updateActionButtonText() {
-    if (this.famiconStyleGameState.conversationId === -1) {
-      this.actionButtonText = '調べる';
+    if (this.famiconStyleGameState.conversationListId === -1) {
+      this.investigateButtonText = '調べる';
     } else {
-      this.actionButtonText = '次へ';
+      this.investigateButtonText = '次へ';
     }
   }
 

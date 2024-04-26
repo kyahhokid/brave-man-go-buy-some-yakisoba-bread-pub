@@ -11,8 +11,8 @@ export class FamiconStyleGameState {
   braveMan = new Character();
   // 地図
   map: boolean[][] = []
-  // 会話ID(会話中以外は-1)
-  conversationId = -1;
+  // 会話リストID(会話中以外は-1)
+  conversationListId = -1;
   // 会話の状況
   conversationState = new ConversationState();
 }

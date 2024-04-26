@@ -40,7 +40,7 @@ export class ConversationController {
    */
   advanceConversation(conversationState: ConversationState, chapterType: ChapterType, conversationListId: number, onAdvanceConversationIndex: () => void, onFinishConversation: () => void) {
     conversationState.conversationIndex++;
-    const conversation = this.conversationService.get(chapterType, conversationState.conversationIndex);
+    const conversation = this.conversationService.get(chapterType, conversationState.conversationIndex, conversationListId);
     if (conversation) {
       conversationState.conversation = conversation;
       if (conversationState.conversation.backgroundType !== null) {
