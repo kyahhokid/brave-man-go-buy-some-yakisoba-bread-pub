@@ -5,6 +5,7 @@ import { DirectionType } from "src/app/domain/model/global/direction";
 import { GameState } from "src/app/domain/state/game-state";
 import { ConversationManager } from "./conversation-manager";
 import { ConversationController } from "./controller/conversation-controller";
+import { FamiconStyleGameState } from "src/app/domain/state/famicon-style-game-state";
 
 /**
  *  最初の焼きそばパンのゲームマネージャー
@@ -34,6 +35,8 @@ export class FirstYakisobaBreadGameManager {
     if (braveMan.position.x === 9 && braveMan.position.y === 2 && braveMan.direction === CharacterDirectionType.Up) {
       gameState.famiconStyleGameState.conversationId = 0;
       this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, 0);
+      // 各コンポーネントに状態更新を検知させるためにオブジェクトを再生成している。
+      gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState(), gameState.famiconStyleGameState);
       this.store.next(gameState);
     }
   }

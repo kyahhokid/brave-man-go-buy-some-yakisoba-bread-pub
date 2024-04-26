@@ -1,3 +1,4 @@
 <app-famicon-style-map [famiconStyleGameState]="famiconStyleGameState"></app-famicon-style-map>
-<app-famicon-style-game-controller (moveButtonClick)="onClickMoveButton($event)"
+<app-famicon-style-game-controller [famiconStyleGameState]="famiconStyleGameState"
+  (moveButtonClick)="onClickMoveButton($event)"
   (investigateButtonClick)="onClickInvestigateButton()"></app-famicon-style-game-controller>
