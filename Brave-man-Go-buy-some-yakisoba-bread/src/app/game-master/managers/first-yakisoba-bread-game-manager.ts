@@ -32,7 +32,7 @@ export class FirstYakisobaBreadGameManager {
     const gameState = Object.assign(new GameState, this.store.getValue());
     const braveMan = gameState.famiconStyleGameState.braveMan;
     if (braveMan.position.x === 9 && braveMan.position.y === 2 && braveMan.direction === CharacterDirectionType.Up) {
-      gameState.famiconStyleGameState.isShowConversation = true;
+      gameState.famiconStyleGameState.conversationId = 0;
       this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, 0);
       this.store.next(gameState);
     }
