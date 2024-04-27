@@ -41,11 +41,13 @@ export class FirstYakisobaBreadGameManager {
         this.store.next(gameState);
       })
     } else if (braveMan.position.x === 9 && braveMan.position.y === 2 && braveMan.direction === CharacterDirectionType.Up) {
-      gameState.famiconStyleGameState.conversationListId = 0;
-      this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, 0);
-      // 各コンポーネントに状態更新を検知させるためにオブジェクトを再生成している。
-      gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState(), gameState.famiconStyleGameState);
-      this.store.next(gameState);
+      if (!gameState.famiconStyleGameState.firstYakisobaBreadState.isGottenYakisobaBread) {
+        gameState.famiconStyleGameState.conversationListId = 0;
+        this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, 0);
+        // 各コンポーネントに状態更新を検知させるためにオブジェクトを再生成している。
+        gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState(), gameState.famiconStyleGameState);
+        this.store.next(gameState);
+      }
     }
   }
 
