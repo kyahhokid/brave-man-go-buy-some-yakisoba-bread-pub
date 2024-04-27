@@ -5,7 +5,8 @@
     <app-famicon-style-game-character
       [characterDirection]="famiconStyleGameState.braveMan.direction"></app-famicon-style-game-character>
   </div>
-  <app-famicon-style-map-layer2 class="layer2" [ngStyle]="layer2Style"></app-famicon-style-map-layer2>
+  <app-famicon-style-map-layer2 class="layer2" [famiconStyleGameState]="famiconStyleGameState"
+    [ngStyle]="layer2Style"></app-famicon-style-map-layer2>
   <app-conversation class="conversation" *ngIf="famiconStyleGameState.conversationListId !== -1"
     [conversationState]="famiconStyleGameState.conversationState"
     (contentClick)="onClickConversationContent()"></app-conversation>

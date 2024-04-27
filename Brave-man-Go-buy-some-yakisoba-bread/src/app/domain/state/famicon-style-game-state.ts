@@ -1,5 +1,6 @@
 import { Character } from "../model/character/character";
 import { ConversationState } from "./conversation-state";
+import { FirstYakisobaBreadState } from "./first-yakisoba-bread-state";
 
 /**
  * ファミコン風ゲームの状況
@@ -15,4 +16,6 @@ export class FamiconStyleGameState {
   conversationListId = -1;
   // 会話の状況
   conversationState = new ConversationState();
+  // 最初の焼きそばパンの状況
+  firstYakisobaBreadState = new FirstYakisobaBreadState();
 }

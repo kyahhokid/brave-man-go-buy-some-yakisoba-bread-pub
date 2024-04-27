@@ -35,6 +35,7 @@ export class FirstYakisobaBreadGameManager {
     if (gameState.famiconStyleGameState.conversationListId !== -1) {
       this.advanceConversation(() => {
         gameState.famiconStyleGameState.conversationListId = -1;
+        gameState.famiconStyleGameState.firstYakisobaBreadState.isGottenYakisobaBread = true;
         // 各コンポーネントに状態更新を検知させるためにオブジェクトを再生成している。
         gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState(), gameState.famiconStyleGameState);
         this.store.next(gameState);
