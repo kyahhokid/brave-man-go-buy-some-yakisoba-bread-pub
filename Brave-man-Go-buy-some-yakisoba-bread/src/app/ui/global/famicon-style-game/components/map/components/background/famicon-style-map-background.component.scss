@@ -3,15 +3,13 @@
   background-repeat: no-repeat;
   height: 365px;
   width: 640px;
+  position: relative;
+}
 
-  .layer2 {
-    background-size: auto 100%;
-    background-repeat: no-repeat;
-    z-index: 1;
-    overflow: hidden;
-    width: 124.587px;
-    height: 31.147px;
-    position: absolute;
-    top: 245px;
-  }
+.go-home {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 325px;
+  left: 122px;
 }

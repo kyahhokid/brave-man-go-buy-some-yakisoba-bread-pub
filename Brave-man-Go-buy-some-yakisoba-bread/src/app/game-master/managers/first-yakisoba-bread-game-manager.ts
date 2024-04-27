@@ -6,6 +6,7 @@ import { GameState } from "src/app/domain/state/game-state";
 import { ConversationManager } from "./conversation-manager";
 import { ConversationController } from "./controller/conversation-controller";
 import { FamiconStyleGameState } from "src/app/domain/state/famicon-style-game-state";
+import { ChapterType } from "src/app/domain/model/chapter/chapter-type";
 
 /**
  *  最初の焼きそばパンのゲームマネージャー
@@ -40,7 +41,7 @@ export class FirstYakisobaBreadGameManager {
             break;
           }
           case 1: {
-
+            gameState.famiconStyleGameState.firstYakisobaBreadState.isPaid = true;
           }
         }
         gameState.famiconStyleGameState.conversationListId = -1;
@@ -57,11 +58,18 @@ export class FirstYakisobaBreadGameManager {
         this.store.next(gameState);
       }
     } else if (braveMan.position.x === 4 && braveMan.position.y === 5 && braveMan.direction === CharacterDirectionType.Left) {
-      if (gameState.famiconStyleGameState.firstYakisobaBreadState.isGottenYakisobaBread) {
+      if (gameState.famiconStyleGameState.firstYakisobaBreadState.isGottenYakisobaBread
+        && !gameState.famiconStyleGameState.firstYakisobaBreadState.isPaid
+      ) {
         gameState.famiconStyleGameState.conversationListId = 1;
         this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, gameState.famiconStyleGameState.conversationListId);
         // 各コンポーネントに状態更新を検知させるためにオブジェクトを再生成している。
         gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState(), gameState.famiconStyleGameState);
+        this.store.next(gameState);
+      }
+    } else if (braveMan.position.x === 4 && braveMan.position.y === 11 && braveMan.direction === CharacterDirectionType.Down) {
+      if (gameState.famiconStyleGameState.firstYakisobaBreadState.isPaid) {
+        gameState.chapterType = ChapterType.SecondYakisobaBreadConversation;
         this.store.next(gameState);
       }
     }

@@ -6,4 +6,6 @@ export enum ChapterType {
   FirstYakisobaBreadConversation,
   // 最初の焼きそばパン
   FirstYakisobaBread,
+  // 2番目の焼きそばパンの会話
+  SecondYakisobaBreadConversation,
 }
