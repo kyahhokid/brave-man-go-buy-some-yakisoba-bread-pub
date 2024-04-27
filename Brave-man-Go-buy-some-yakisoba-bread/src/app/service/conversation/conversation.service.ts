@@ -109,6 +109,16 @@ export class ConversationService {
             new Conversation('アレン', 'これが魔王と関係あるとは思えないけど……。', null),
             new Conversation('アレン', 'まぁ……とりあえず持って帰ってみるか。', null),
           ]
+          break;
+        }
+        case 1: {
+          this.conversationListCache = [
+            new Conversation('アレン', 'お会計お願いします。', null),
+            new Conversation('店員', 'はい、焼きそばパンお一つですね。100円になります。', null),
+            new Conversation('アレン', 'これでお願いします。', null),
+            new Conversation('店員', '100円ちょうどいただきます。ありがとうございました。', null),
+          ]
+          break;
         }
       }
     }

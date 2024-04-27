@@ -34,8 +34,16 @@ export class FirstYakisobaBreadGameManager {
     const braveMan = gameState.famiconStyleGameState.braveMan;
     if (gameState.famiconStyleGameState.conversationListId !== -1) {
       this.advanceConversation(() => {
+        switch (gameState.famiconStyleGameState.conversationListId) {
+          case 0: {
+            gameState.famiconStyleGameState.firstYakisobaBreadState.isGottenYakisobaBread = true;
+            break;
+          }
+          case 1: {
+
+          }
+        }
         gameState.famiconStyleGameState.conversationListId = -1;
-        gameState.famiconStyleGameState.firstYakisobaBreadState.isGottenYakisobaBread = true;
         // 各コンポーネントに状態更新を検知させるためにオブジェクトを再生成している。
         gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState(), gameState.famiconStyleGameState);
         this.store.next(gameState);
@@ -43,7 +51,15 @@ export class FirstYakisobaBreadGameManager {
     } else if (braveMan.position.x === 9 && braveMan.position.y === 2 && braveMan.direction === CharacterDirectionType.Up) {
       if (!gameState.famiconStyleGameState.firstYakisobaBreadState.isGottenYakisobaBread) {
         gameState.famiconStyleGameState.conversationListId = 0;
-        this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, 0);
+        this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, gameState.famiconStyleGameState.conversationListId);
+        // 各コンポーネントに状態更新を検知させるためにオブジェクトを再生成している。
+        gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState(), gameState.famiconStyleGameState);
+        this.store.next(gameState);
+      }
+    } else if (braveMan.position.x === 4 && braveMan.position.y === 5 && braveMan.direction === CharacterDirectionType.Left) {
+      if (gameState.famiconStyleGameState.firstYakisobaBreadState.isGottenYakisobaBread) {
+        gameState.famiconStyleGameState.conversationListId = 1;
+        this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, gameState.famiconStyleGameState.conversationListId);
         // 各コンポーネントに状態更新を検知させるためにオブジェクトを再生成している。
         gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState(), gameState.famiconStyleGameState);
         this.store.next(gameState);
