@@ -5,41 +5,33 @@
   $arrow-color: #aaffaa;
   $arrow-size: 35px;
 
-  .up {
+  .arrow-button {
     position: absolute;
+    height: $arrow-size;
+    width: $arrow-size;
+    background-color: $arrow-color;
+    cursor: pointer;
+    // スマホでタップしたままスワイプするとpointerupイベントが発生しない現象の防止
+    touch-action: none;
+    // 長押し時のポップアップ停止
+    user-select: none;
+  }
+
+  .up {
     left: 90px;
     top: 30px;
-    height: $arrow-size;
-    width: $arrow-size;
-    background-color: $arrow-color;
-    cursor: pointer;
   }
   .left {
-    position: absolute;
     left: 45px;
     top: 75px;
-    height: $arrow-size;
-    width: $arrow-size;
-    background-color: $arrow-color;
-    cursor: pointer;
   }
   .right {
-    position: absolute;
     left: 135px;
     top: 75px;
-    height: $arrow-size;
-    width: $arrow-size;
-    background-color: $arrow-color;
-    cursor: pointer;
   }
   .down {
-    position: absolute;
     left: 90px;
     top: 120px;
-    height: $arrow-size;
-    width: $arrow-size;
-    background-color: $arrow-color;
-    cursor: pointer;
   }
   .investigate {
     position: absolute;
