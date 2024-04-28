@@ -42,23 +42,16 @@ export class FamiconStyleGameControllerComponent implements OnChanges {
   }
 
   /**
-   * 移動ボタンがクリックされたときに呼ばれる。
-   * OUTPUTで移動ボタンがクリックされたことを通知する。
-   */
-  onClickMoveButton(directionType: DirectionType) {
-    this.moveButtonClick.emit(directionType);
-  }
-
-  /**
    * 移動ボタンが長押しされたときに呼ばれる。
-   * 長押し中、0.2秒ごとに移動ボタンがクリックされた時の処理を実行する。
+   * 長押し中、0.2秒ごとにOUTPUTで移動ボタンがクリックされたことを通知する。
    */
   onPointerDownMoveButton(directionType: DirectionType) {
+    this.moveButtonClick.emit(directionType);
     document.addEventListener('pointerup', () => {
       this.stopBraveManSubject.next(null);
     }, { once: true });
-    timer(0, 200).pipe(takeUntil(this.stopBraveManSubject)).subscribe(() => {
-      this.onClickMoveButton(directionType)
+    interval(200).pipe(takeUntil(this.stopBraveManSubject)).subscribe(() => {
+      this.moveButtonClick.emit(directionType);
     })
   }
 

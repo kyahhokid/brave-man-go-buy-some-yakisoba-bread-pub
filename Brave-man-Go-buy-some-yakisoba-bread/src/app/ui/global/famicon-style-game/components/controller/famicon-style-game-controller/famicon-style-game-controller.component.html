@@ -1,12 +1,12 @@
 <div class="content">
   <!-- oncontextmenu="return false;"で長押し時のポップアップ停止 -->
-  <button class="arrow-button up" oncontextmenu="return false;" (click)="onClickMoveButton(directionType.Up)"
+  <button class="arrow-button up" oncontextmenu="return false;"
     (pointerdown)="onPointerDownMoveButton(directionType.Up)">↑</button>
-  <button class="arrow-button left" oncontextmenu="return false;" (click)="onClickMoveButton(directionType.Left)"
+  <button class="arrow-button left" oncontextmenu="return false;"
     (pointerdown)="onPointerDownMoveButton(directionType.Left)">←</button>
-  <button class="arrow-button right" oncontextmenu="return false;" (click)="onClickMoveButton(directionType.Right)"
+  <button class="arrow-button right" oncontextmenu="return false;"
     (pointerdown)="onPointerDownMoveButton(directionType.Right)">→</button>
-  <button class="arrow-button down" oncontextmenu="return false;" (click)="onClickMoveButton(directionType.Down)"
+  <button class="arrow-button down" oncontextmenu="return false;"
     (pointerdown)="onPointerDownMoveButton(directionType.Down)">↓</button>
   <button class="investigate" (click)="onClickInvestigateButton()">{{investigateButtonText}}</button>
 </div>
