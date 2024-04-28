@@ -59,7 +59,6 @@ export class FamiconStyleGameManager {
           gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.Down;
           this.store.next(gameState);
         } else {
-          gameState.famiconStyleGameState.braveMan.isMoving = true;
           gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState, gameState.famiconStyleGameState);
           gameState.famiconStyleGameState.braveMan.position.y += 0.5;
           gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.DownWalking2;
@@ -69,7 +68,6 @@ export class FamiconStyleGameManager {
             gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState, gameState.famiconStyleGameState);
             gameState.famiconStyleGameState.braveMan.position.y += 0.5;
             gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.DownWalking1;
-            gameState.famiconStyleGameState.braveMan.isMoving = false;
             this.store.next(gameState);
           })));
           await firstValueFrom(timer(100).pipe(tap(() => {
@@ -85,7 +83,6 @@ export class FamiconStyleGameManager {
           gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.Left;
           this.store.next(gameState);
         } else {
-          gameState.famiconStyleGameState.braveMan.isMoving = true;
           gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState, gameState.famiconStyleGameState);
           gameState.famiconStyleGameState.braveMan.position.x -= 0.5;
           gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.LeftWalking2;
@@ -95,7 +92,6 @@ export class FamiconStyleGameManager {
             gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState, gameState.famiconStyleGameState);
             gameState.famiconStyleGameState.braveMan.position.x -= 0.5;
             gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.LeftWalking1;
-            gameState.famiconStyleGameState.braveMan.isMoving = false;
             this.store.next(gameState);
           })));
           await firstValueFrom(timer(100).pipe(tap(() => {
@@ -111,7 +107,6 @@ export class FamiconStyleGameManager {
           gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.Right;
           this.store.next(gameState);
         } else {
-          gameState.famiconStyleGameState.braveMan.isMoving = true;
           gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState, gameState.famiconStyleGameState);
           gameState.famiconStyleGameState.braveMan.position.x += 0.5;
           gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.RightWalking2;
@@ -121,7 +116,6 @@ export class FamiconStyleGameManager {
             gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState, gameState.famiconStyleGameState);
             gameState.famiconStyleGameState.braveMan.position.x += 0.5;
             gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.RightWalking1;
-            gameState.famiconStyleGameState.braveMan.isMoving = false;
             this.store.next(gameState);
           })));
           await firstValueFrom(timer(100).pipe(tap(() => {
@@ -137,7 +131,6 @@ export class FamiconStyleGameManager {
           gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.Up;
           this.store.next(gameState);
         } else {
-          gameState.famiconStyleGameState.braveMan.isMoving = true;
           gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState, gameState.famiconStyleGameState);
           gameState.famiconStyleGameState.braveMan.position.y -= 0.5;
           gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.UpWalking2;
@@ -147,7 +140,6 @@ export class FamiconStyleGameManager {
             gameState.famiconStyleGameState = Object.assign(new FamiconStyleGameState, gameState.famiconStyleGameState);
             gameState.famiconStyleGameState.braveMan.position.y -= 0.5;
             gameState.famiconStyleGameState.braveMan.direction = CharacterDirectionType.UpWalking1;
-            gameState.famiconStyleGameState.braveMan.isMoving = false;
             this.store.next(gameState);
           })));
           await firstValueFrom(timer(100).pipe(tap(() => {
@@ -168,7 +160,7 @@ export class FamiconStyleGameManager {
    * @returns 
    */
   private isMovable(direction: DirectionType, famiconStyleGameState: FamiconStyleGameState): boolean {
-    if (famiconStyleGameState.braveMan.isMoving) {
+    if (!Number.isInteger(famiconStyleGameState.braveMan.position.x) || !Number.isInteger(famiconStyleGameState.braveMan.position.y)) {
       // 移動中の場合は強制的にfalseを返す。
       return false;
     }

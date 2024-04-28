@@ -9,6 +9,4 @@ export class Character {
   position = new Position(0, 0);
   // 向き
   direction = CharacterDirectionType.Up;
-  // 移動中か
-  isMoving = false;
 }
