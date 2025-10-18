@@ -5,4 +5,9 @@
     [famiconStyleGameState]="gameState.famiconStyleGameState"
     (moveButtonClick)="onClickMoveButtonInFamiconStyleGame($event)"
     (investigateButtonClick)="onClickInvestigateButtonInFamiconStyleGame()"></app-famicon-style-game>
+  <div *ngIf="gameState.chapterType === chapterType.SecondYakisobaBreadConversation">
+    興味を持ってくれてありがとうございます！<br>
+    <br>
+    現在、続きを製作中です！
+  </div>
 </div>

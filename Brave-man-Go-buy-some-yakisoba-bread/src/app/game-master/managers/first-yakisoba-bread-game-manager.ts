@@ -34,6 +34,7 @@ export class FirstYakisobaBreadGameManager {
     const gameState = Object.assign(new GameState, this.store.getValue());
     const braveMan = gameState.famiconStyleGameState.braveMan;
     if (gameState.famiconStyleGameState.conversationListId !== -1) {
+      // 会話中
       this.advanceConversation(() => {
         switch (gameState.famiconStyleGameState.conversationListId) {
           case 0: {
@@ -50,6 +51,7 @@ export class FirstYakisobaBreadGameManager {
         this.store.next(gameState);
       })
     } else if (braveMan.position.x === 9 && braveMan.position.y === 2 && braveMan.direction === CharacterDirectionType.Up) {
+      // 焼きそばパンを手に取る。
       if (!gameState.famiconStyleGameState.firstYakisobaBreadState.isGottenYakisobaBread) {
         gameState.famiconStyleGameState.conversationListId = 0;
         this.conversationController.startConversation(gameState.famiconStyleGameState.conversationState, gameState.chapterType, gameState.famiconStyleGameState.conversationListId);
@@ -58,6 +60,7 @@ export class FirstYakisobaBreadGameManager {
         this.store.next(gameState);
       }
     } else if (braveMan.position.x === 4 && braveMan.position.y === 5 && braveMan.direction === CharacterDirectionType.Left) {
+      // 店員に話しかける。
       if (gameState.famiconStyleGameState.firstYakisobaBreadState.isGottenYakisobaBread
         && !gameState.famiconStyleGameState.firstYakisobaBreadState.isPaid
       ) {
@@ -68,6 +71,7 @@ export class FirstYakisobaBreadGameManager {
         this.store.next(gameState);
       }
     } else if (braveMan.position.x === 4 && braveMan.position.y === 11 && braveMan.direction === CharacterDirectionType.Down) {
+      // 店の外に出る。
       if (gameState.famiconStyleGameState.firstYakisobaBreadState.isPaid) {
         gameState.chapterType = ChapterType.SecondYakisobaBreadConversation;
         this.store.next(gameState);

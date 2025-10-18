@@ -37,7 +37,7 @@ export class AppComponent {
   }
 
   /**
-   * ファミコン風ゲームの移動ボタンをクリックされると呼ばれる。
+   * ファミコン風ゲームの調べるボタンをクリックされると呼ばれる。
    */
   onClickInvestigateButtonInFamiconStyleGame() {
     this.gameMaster.investigateInFamiconStyleGame();
